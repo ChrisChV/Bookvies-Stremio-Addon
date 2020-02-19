@@ -17,7 +17,7 @@ MANIFEST = {
         'stream',
     ],
     'idPrefixes':[
-        'ebook:',
+        'bk:',
     ]
 }
 
@@ -79,6 +79,7 @@ def addon_catalog_next(catalogType, catalogId, actual):
     next = actual + PAGINATION_SIZE
     
     catalog = list(CATALOG[catalogType].items())[actual:][:next] if catalogType in CATALOG else []
+    catalogType = 'movie'
 
     return makePreview(catalogType ,catalog)
 
@@ -98,13 +99,20 @@ def addon_stream(catalogType, id):
         })
     return respond_with(streams)
 
-@app.route('/meta/<type>/<id>.json')
-def addon_meta(type, id):
-    if type not in MANIFEST['types']:
+@app.route('/meta/<categoryType>/<id>.json')
+def addon_meta(categoryType, id):
+    if categoryType not in MANIFEST['types']:
         abort(404)
 
+    item = CATALOG['books'][id]
+    
     metas = {
-        'meta': {}
+        'meta': {
+            'id': id,
+            'type': 'movie',
+            'name': item['name'],
+            'poster': item['imageURL']
+        }
     }
 
     return respond_with(metas)

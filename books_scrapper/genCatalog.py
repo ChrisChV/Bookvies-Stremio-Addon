@@ -19,7 +19,7 @@ def makeCatalogAndStreams():
         data = json.load(json_file)
         json_file.close()
         for item in data:
-            _catalog['books']['ebook:' + generateID(actual_id)] = item
+            _catalog['books']['bk:' + generateID(actual_id)] = item
             actual_id += 1
     outfile = open('catalog.json', 'w')
     json.dump(_catalog, outfile)

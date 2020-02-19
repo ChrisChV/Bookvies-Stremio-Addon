@@ -15,4 +15,10 @@ class Book(scrapy.Item):
     releaseDate = scrapy.Field()
     downloads = scrapy.Field()
     source = scrapy.Field()
-    
+
+
+class BasedOnTheBook(scrapy.Item):
+    bookName = scrapy.Field()
+    bookAuthor = scrapy.Field()
+    movieName = scrapy.Field()
+    movieYear = scrapy.Field()
