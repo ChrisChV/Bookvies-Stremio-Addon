@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#databases
+books_scrapper/title.akas.tsv
+books_scrapper/title.ratings.tsv
