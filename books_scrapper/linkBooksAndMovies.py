@@ -1,13 +1,15 @@
 import json
 
 TITLE_ID_COL = 0
+TITLE_TYPE_COL = 1
 TITLE_RANK_COL = 1
-TITLE_COL = 2
-TITLE_REGION = 3
-REGION_US = "US"
+TITLE_COL = 3
+TITLE_YEAR = 5
+MOVIE_TYPE = "movie"
+
 
 def getTitleNameDB():
-    dbFile = open('title.akas.tsv')
+    dbFile = open('title.basics.tsv')
     db = {}
     count = 0
     for line in dbFile:
@@ -15,8 +17,11 @@ def getTitleNameDB():
         if count == 1:
             continue
         columns = line.split('\t')
-        if(columns[TITLE_REGION] == REGION_US):
-            db[columns[TITLE_COL].strip()] = columns[TITLE_ID_COL]
+        if(columns[TITLE_TYPE_COL] == MOVIE_TYPE):
+            key = columns[TITLE_COL].strip()
+            if key not in db:
+                db[key] = {}
+            db[key][columns[TITLE_YEAR]] = columns[TITLE_ID_COL]
     dbFile.close()
     return db
 
@@ -39,6 +44,8 @@ def clearRes(res):
     return newRes
 
 dbID = getTitleNameDB()
+print(dbID)
+
 dbRank = getRankingDB()
 OTBFile = open('basedOTB.json')
 otb = json.load(OTBFile)
@@ -49,12 +56,18 @@ count2 = 0
 for item in otb:
     key = item['movieName'].strip()
     if key in dbID:
-        item['title_id'] = dbID[key]
-        if item['title_id'] in dbRank:
-            item['rank'] = float(dbRank[item['title_id']])
+        movie = dbID[key]
+        if item['movieYear'] in movie:
+            item['title_id'] = movie[item['movieYear']]
+            if item['title_id'] in dbRank:
+                item['rank'] = float(dbRank[item['title_id']])
+            else:
+                item['rank'] = 0.0
+            count += 1
         else:
+            item['title_id'] = None
             item['rank'] = 0.0
-        count += 1
+            count2 += 1    
     else:
         item['title_id'] = None
         item['rank'] = 0.0

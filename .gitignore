@@ -131,3 +131,4 @@ dmypy.json
 #databases
 books_scrapper/title.akas.tsv
 books_scrapper/title.ratings.tsv
+books_scrapper/title.basics.tsv
