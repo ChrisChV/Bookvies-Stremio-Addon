@@ -43,10 +43,33 @@ class PosterscarpySpider(scrapy.Spider):
 
     def parsePoster(self, response):
         poster = response.xpath("//div[@class='poster']/a/img/@src").extract()
+        div = response.xpath("//div[@class='plot_summary ']")[0]
+        description = div.xpath("./div[@class='summary_text']/text()").extract()[0].strip()
+        credits = div.xpath("./div[@class='credit_summary_item']")
+
+        director = ''
+        cast = []
+        for credit in credits:
+            creditType = credit.xpath("./h4/text()").extract()[0].strip()
+            if(creditType == "Director:"):
+                director = credit.xpath("./a/text()").extract()        
+                if len(director) != 0:
+                    director = director[0].strip()
+                else:
+                    director = ''
+            elif(creditType == "Stars:"):
+                cast = credits.xpath("./a/text()").extract()
+                if(cast[-1].find("See full cast & crew") != -1):
+                    cast = cast[:-1]
         if len(poster) != 0:
             poster = poster[0]
-            item = IMDBMovie()
-            item['titleId'] = response.meta['titleId']
-            item['posterUrl']  = poster
-            yield item
+        else:
+            poster = None
+        item = IMDBMovie()
+        item['titleId'] = response.meta['titleId']
+        item['posterUrl']  = poster
+        item['cast'] = cast
+        item['director'] = director
+        item['description'] = description
+        yield item
         

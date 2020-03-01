@@ -64,16 +64,20 @@ def makePreview(catalogType, catalog):
     return respond_with(metaPreviews)
 
 def makePreviewBookviee(catalogType, catalog):
-    metaPreviews = {
-        'metas': [
-            {
-                'id': item['title_id'],
-                'type': catalogType,
-                'name': item['movieName'],
-                'poster': item['posterUrl']
-            } for item in catalog
-        ]
-    }
+    metaPreviews = {'metas': []}
+    for item in catalog:
+        meta = {
+            'id': item['title_id'],
+            'type': catalogType,
+            'name': item['movieName'],
+            'poster': item['posterUrl'],
+            'year': item['movieYear'],
+        }
+        if item['director'] != '':
+            meta['director'] = item['director']
+        if item['description'] != '':
+            meta['description'] = item['description']
+        metaPreviews['metas'].append(meta)
     return respond_with(metaPreviews)
 
 @app.route('/manifest.json')

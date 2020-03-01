@@ -27,3 +27,6 @@ class BasedOnTheBook(scrapy.Item):
 class IMDBMovie(scrapy.Item):
     titleId = scrapy.Field()
     posterUrl = scrapy.Field()
+    cast = scrapy.Field()
+    director = scrapy.Field()
+    description = scrapy.Field()

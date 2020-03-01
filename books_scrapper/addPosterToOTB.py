@@ -15,10 +15,18 @@ for item in posters:
     postersDic[item['titleId']] = item
 
 for item in otb:
-    if item['title_id'] in postersDic:
-        item['posterUrl'] = postersDic[item['title_id']]['posterUrl']
+    key = item['title_id']
+    if key in postersDic:
+        _item = postersDic[key]
+        item['posterUrl'] = _item['posterUrl']
+        item['cast'] = _item['cast']
+        item['director'] = _item['director']
+        item['description'] = _item['description']
     else:
         item['posterUrl'] = None
+        item['cast'] = None
+        item['director']  = None
+        item['description'] = None
     res.append(item)
 
 outFile = open('outOTB_2.json', 'w')
