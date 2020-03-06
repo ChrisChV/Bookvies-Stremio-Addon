@@ -30,3 +30,8 @@ class IMDBMovie(scrapy.Item):
     cast = scrapy.Field()
     director = scrapy.Field()
     description = scrapy.Field()
+
+class AmazonBook(scrapy.Item):
+    titleId = scrapy.Field()
+    bookPosterUrl = scrapy.Field()
+    amazonBookUrl = scrapy.Field()

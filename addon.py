@@ -30,6 +30,7 @@ PAGINATION_SIZE = 50
 
 CATALOG = {}
 MOVIE_CATALOG = {}
+MOVIE_STREAMS = {}
 
 app = Flask(__name__)
 
@@ -46,8 +47,10 @@ def loadCatalog():
     jsonFile = open('catalog.json', 'r')
     CATALOG = json.load(jsonFile)
     jsonFile.close()
-    jsonFile = open('outOTB_2.json', 'r')
+    jsonFile = open('outOTB_3.json', 'r')
     MOVIE_CATALOG = json.load(jsonFile)
+    for item in MOVIE_CATALOG:
+        MOVIE_STREAMS[item['title_id']] = item['urls']
     jsonFile.close()
 
 def makePreview(catalogType, catalog):
@@ -124,10 +127,7 @@ def addon_stream(catalogType, id):
     
     streams = {'streams': []}
     if(id[:2] == 'tt'):
-        streams['streams'].append({
-            'title': 'Book',
-            'externalUrl': "http://www.gutenberg.org/files/15809/15809-h/15809-h.htm"
-        })    
+        streams['streams'] = MOVIE_STREAMS[id]
         return respond_with(streams)
     else:
         catalogType = 'books'
