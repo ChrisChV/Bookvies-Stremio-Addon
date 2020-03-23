@@ -64,6 +64,8 @@ class AmazonbooksSpider(scrapy.Spider):
             time.sleep(1)
 
     def parseBook(self, response):
+        item = AmazonBook()
+        item['titleId'] = response.meta['titleId']
         check = response.xpath("//html//title/text()").extract()
         if len(check) != 0:
             check = check[0].strip()
@@ -76,10 +78,10 @@ class AmazonbooksSpider(scrapy.Spider):
         results = response.xpath("//div[@class='s-result-list s-search-results sg-row']")
         real_author = response.meta['book_author'].split(',')
         if len(real_author) != 2:
+            yield item
             return
         real_author[0] = real_author[0].strip()
         real_author[1] = real_author[1].strip()
-        
         for div in results:
             author = div.xpath(".//div[@class='a-row a-size-base a-color-secondary']/a/text()").extract()
             if len(author) == 0:
@@ -89,9 +91,8 @@ class AmazonbooksSpider(scrapy.Spider):
                 image = div.xpath(".//img")
                 bookImageUrl = image.xpath("./@src").extract()[0]
                 bookUrl = image.xpath("./parent::div/parent::a/@href").extract()[0]
-                item = AmazonBook()
-                item['titleId'] = response.meta['titleId']
                 item['bookPosterUrl'] = bookImageUrl
                 item['amazonBookUrl'] = self.root_url + bookUrl
                 yield item
-                break
+                return
+        yield item
