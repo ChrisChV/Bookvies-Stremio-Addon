@@ -9,7 +9,8 @@ MANIFEST = {
     'id': 'org.stremio.bookvies',
     'version': '1.0.0',
     'name': 'Bookvies',
-    'description': 'An universe of books from Open Sources',
+    'description': 'This Addon collect all movies that are based on a Book and adds the link ' +
+        'to Amazon books of that book. Also adds some books to your Books catalogue from Gutenberg.org.',
     'types': ['books', 'movie'],
     'catalogs': [
         {'type': 'movie', 'id': BOOKVIES_ID, 'name': 'Bookvies'},
@@ -44,10 +45,10 @@ def respond_with(data):
 def loadCatalog():
     global CATALOG
     global MOVIE_CATALOG
-    jsonFile = open('catalog.json', 'r')
+    jsonFile = open('books_catalog.json', 'r')
     CATALOG = json.load(jsonFile)
     jsonFile.close()
-    jsonFile = open('outOTB_3.json', 'r')
+    jsonFile = open('bookvies_catalog.json', 'r')
     MOVIE_CATALOG = json.load(jsonFile)
     for item in MOVIE_CATALOG:
         MOVIE_STREAMS[item['title_id']] = item['urls']

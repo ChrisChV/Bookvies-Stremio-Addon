@@ -39,19 +39,12 @@ class AmazonbooksSpider(scrapy.Spider):
         jsonFile = open('outOTB_2.json')
         data = json.load(jsonFile)
         jsonFile.close()
-        jsonFile = open('ab.json')
-        abData = json.load(jsonFile)
-        jsonFile.close()
-        for item in abData:
-            self.amazonBooks[item['titleId']] = True
         count = 0
         for item in data:
             count += 1
             book_title = item['bookName']
             book_author = item['bookAuthor']
             titleId = item['title_id']
-            if titleId in self.amazonBooks:
-                continue
             yield scrapy.Request(
                 self.root_url + 's?k=' + book_title + '&i=stripbooks',
                 callback=self.parseBook,

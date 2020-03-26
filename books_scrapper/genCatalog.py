@@ -2,6 +2,8 @@ import json
 
 ID_SIZE = 7
 
+_letters = ['a']
+
 def generateID(id):
     res = ""
     idLen = len(str(id))
@@ -12,7 +14,6 @@ def generateID(id):
 
 def makeCatalogAndStreams():
     _catalog = {'books':{}}
-    _letters = ['a']
     actual_id = 1
     for let in _letters:
         json_file = open(let + '.json')
