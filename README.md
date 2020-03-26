@@ -16,7 +16,7 @@ This Addon collect all movies that are based on a Book and adds the link to Amaz
 
 ## How to generate books_catalog.json
 
-    All scripts are running on `books_scrapper` directory.
+All scripts are running on `books_scrapper` directory.
 
 1. Craw the books with the prefer letter:
 
@@ -24,7 +24,7 @@ This Addon collect all movies that are based on a Book and adds the link to Amaz
  > scrapy runspider books_scrapper/spiders/gutenberg.py -a letter=c
  ```
 
- On the example above, I will crawl the books by the letter `c`. It will generate a `out.json` file.
+On the example above, I will crawl the books by the letter `c`. It will generate a `out.json` file.
 
 2. Change `out.json` to the letter name `c.json`.
 3. Generate the files with the letters you want.
@@ -35,7 +35,7 @@ This Addon collect all movies that are based on a Book and adds the link to Amaz
  > python3 genCatalog.py
  ```
 
- It will generate the `catalog.json` file. This is the book catalog file.
+It will generate the `catalog.json` file. This is the book catalog file.
 
 6. Copy and rename the file:
 
@@ -45,7 +45,7 @@ This Addon collect all movies that are based on a Book and adds the link to Amaz
 
 ## How to generate bookvies_catalog.json
 
-    All scripts are running on `books_scrapper` directory.
+All scripts are running on `books_scrapper` directory.
 
 1. Crawl the On the Book (OTB) information:
 
@@ -53,7 +53,7 @@ This Addon collect all movies that are based on a Book and adds the link to Amaz
  > scrapy runspider books_scrapper/spiders/basedOnTheBook.py 
  ```
 
-    It will generate the `basedOTB.json` file.
+It will generate the `basedOTB.json` file.
 
 2. Download the IMBD databases:
 
@@ -68,7 +68,7 @@ This Addon collect all movies that are based on a Book and adds the link to Amaz
  > python3 linkBooksAndMovies.py
  ```
 
-    It will generate the `outOTB.json` file.
+It will generate the `outOTB.json` file.
 
 4. Crawl posters and movie data from IMBD page:
 
@@ -76,7 +76,7 @@ This Addon collect all movies that are based on a Book and adds the link to Amaz
  > scrapy runspider books_scrapper/spiders/posterScrapy.py
  ```
     
-    It will generate the `posters.json` file.
+It will generate the `posters.json` file.
 
 5. Link the OTB data with the posters and movie data:
 
@@ -84,7 +84,7 @@ This Addon collect all movies that are based on a Book and adds the link to Amaz
  > python3 addPosterToOTB.py
  ```
 
-    It will generate the `outOTB_2.json` file.
+It will generate the `outOTB_2.json` file.
 
 6. Crawl the links to Amazon books:
 
@@ -92,7 +92,7 @@ This Addon collect all movies that are based on a Book and adds the link to Amaz
  > scrapy runspider books_scrapper/spiders/amazonBooks.py
  ```
 
-    It will generate the `amazonBooks.json` file.
+It will generate the `amazonBooks.json` file.
 
 7. Link the OTB data with the amazon books links:
 
@@ -100,7 +100,7 @@ This Addon collect all movies that are based on a Book and adds the link to Amaz
  > python3 linkWithAmazon.py
  ```
     
-    It will generate the `outOTB_3.json` file. This file is the bookvie catalog.
+It will generate the `outOTB_3.json` file. This file is the bookvie catalog.
 
 8. Copy and rename the file:
 
