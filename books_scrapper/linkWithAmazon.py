@@ -17,12 +17,16 @@ for item in amazonData:
 for item in data:
     key = item['title_id']
     if key in amazonDic:
-        item['bookPosterUrl'] = amazonDic[key]['bookPosterUrl']
-        item['urls'] = []
-        item['urls'].append({
-            'title': 'Amazon Book',
-            'externalUrl': amazonDic[key]['amazonBookUrl']
-        })
+        if 'bookPosterUrl' not in amazonDic[key]:
+            item['booksPosterUrl'] = None
+            item['urls'] = []
+        else:
+            item['bookPosterUrl'] = amazonDic[key]['bookPosterUrl']
+            item['urls'] = []
+            item['urls'].append({
+                'title': 'Amazon Book',
+                'externalUrl': amazonDic[key]['amazonBookUrl']
+            })
     else:
         item['bookPosterUrl'] = None
         item['urls'] = []

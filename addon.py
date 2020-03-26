@@ -69,6 +69,9 @@ def makePreview(catalogType, catalog):
 def makePreviewBookviee(catalogType, catalog):
     metaPreviews = {'metas': []}
     for item in catalog:
+        #Esto se tiene que comentar
+        if(len(MOVIE_STREAMS[item['title_id']]) == 0):
+            continue
         meta = {
             'id': item['title_id'],
             'type': catalogType,
@@ -114,7 +117,7 @@ def addon_catalog_next(catalogType, catalogId, actual):
     if(catalogId == GUTENBER_ID):
         catalog = list(CATALOG[catalogType].items())[actual:][:next] if catalogType in CATALOG else []
         catalogType = 'movie'
-        return makePreview(catalogType ,catalog)
+        return makePreview(catalogType, catalog)
     elif(catalogId == BOOKVIES_ID):
         catalog = MOVIE_CATALOG[actual:][:next]
         return makePreviewBookviee(catalogType, catalog)
