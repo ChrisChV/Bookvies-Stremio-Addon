@@ -11,8 +11,8 @@ This Addon collect all movies that are based on a Book and adds the link to Amaz
  ```
 
 2. Open Stremio, go to the Addons tab add the manifest http://127.0.0.1:5000/manifest.json
-3. You can see the book catalog on Discover > Books > Gutenberg Books
-4. You can see the bookvie catalog on Discover > Movies > Bookvies. On each movie, the Addon add the link `Bookvie` to the Amazon book.
+3. You can see the bookvie catalog on Discover > Movies > Bookvies. On each movie, the Addon add the link `Bookvie` to the Amazon book.
+4. You can see the book catalog on Discover > Books > Gutenberg Books
 
 ## How to generate books_catalog.json
 
