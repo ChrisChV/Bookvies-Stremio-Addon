@@ -1,6 +1,15 @@
 # Bookvies-Stremio-Addon
 
+![cover_image](https://i.imgur.com/5RaLI1d.png)
+
+If you are a book lover and want to see what book your favorite movies were based on, you will love this.
 This Addon collect all movies that are based on a Book and adds the link to Amazon books of that book. Also adds some books to your Books catalogue from Gutenberg.org.
+
+## Features
+
+- Adds Amazon Books links to movies based on a book.
+- Adds additional metadata to movies based on a book.
+- Adds a new Book catalogue with books from Gutenberg.org.
 
 ## Deploy and Test Addon
 
@@ -14,7 +23,7 @@ This Addon collect all movies that are based on a Book and adds the link to Amaz
 3. You can see the bookvie catalog on Discover > Movies > Bookvies. On each movie, the Addon add the link `Bookvie` to the Amazon book.
 4. You can see the book catalog on Discover > Books > Gutenberg Books
 
-## How to generate books_catalog.json
+### How to generate books_catalog.json
 
 All scripts are running on `books_scrapper` directory.
 
@@ -43,7 +52,7 @@ It will generate the `catalog.json` file. This is the book catalog file.
  > cp catalog.json ../books_catalog.json
  ```
 
-## How to generate bookvies_catalog.json
+### How to generate bookvies_catalog.json
 
 All scripts are running on `books_scrapper` directory.
 
